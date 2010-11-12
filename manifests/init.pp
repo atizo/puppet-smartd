@@ -1,9 +1,10 @@
 #
 # smartd module
 #
-# Copyright 2008, Puzzle ITC
+# Copyright 2008, Puzzle ITC GmbH
+# Copyright 2010, Atizo AG
 # Marcel Härry haerry+puppet(at)puzzle.ch
-# Simon Josi josi+puppet(at)puzzle.ch
+# Simon Josi simon.josi+puppet(at)atizo.com
 #
 # This program is free software; you can redistribute 
 # it and/or modify it under the terms of the GNU 
@@ -12,17 +13,13 @@
 #
 
 class smartd {
-    include smartd::base
-}
-
-class smartd::base {
-    package{'smartmontools':
-        ensure => present,
-    }
-    service{smartd:
-        ensure => running,
-        enable => true,
-        hasstatus => true,
-        require => Package['smartmontools'],
-    }
+  package{'smartmontools':
+    ensure => present,
+  }
+  service{'smartd':
+    ensure => running,
+    enable => true,
+    hasstatus => true,
+    require => Package['smartmontools'],
+  }
 }
